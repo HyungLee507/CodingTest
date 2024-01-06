@@ -47,8 +47,6 @@ public class Main {
     private static void femaleChange(int[] switches, int switchNumber) {
         int extendedSize = 0;
         while (true) {
-//            if (isOutOfBound(switches, switchNumber, extendedSize)
-//                    || isSameBoolean(switches, switchNumber, extendedSize)) {
             if (isSameBoolean(switches, switchNumber, extendedSize)) {
                 break;
             }
