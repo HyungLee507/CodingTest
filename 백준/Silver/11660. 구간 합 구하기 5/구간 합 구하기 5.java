@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(bf.readLine());
+
         int squareSize = Integer.parseInt(st.nextToken());
         int iterationCount = Integer.parseInt(st.nextToken());
 
@@ -28,25 +29,26 @@ public class Main {
                 }
             }
         }
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < iterationCount; i++) {
             st = new StringTokenizer(bf.readLine());
             int x1 = Integer.parseInt(st.nextToken()) - 1, y1 = Integer.parseInt(st.nextToken()) - 1, x2 =
                     Integer.parseInt(
                             st.nextToken()) - 1, y2 = Integer.parseInt(st.nextToken()) - 1;
             if (x1 == 0 && y1 == 0) {
-                System.out.println(square[x2][y2]);
+                sb.append(square[x2][y2]).append('\n');
             } else if (x1 == 0) {
                 int sum = square[x2][y2] - square[x2][y1 - 1];
-                System.out.println(sum);
+                sb.append(sum).append('\n');
             } else if (y1 == 0) {
                 int sum = square[x2][y2] - square[x1 - 1][y2];
-                System.out.println(sum);
+                sb.append(sum).append('\n');
             } else {
                 int sum = square[x2][y2] + square[x1 - 1][y1 - 1] - square[x1 - 1][y2] - square[x2][y1 - 1];
-                System.out.println(sum);
+                sb.append(sum).append('\n');
             }
-
         }
+        System.out.println(sb);
     }
 
 
