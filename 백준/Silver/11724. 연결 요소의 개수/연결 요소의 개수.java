@@ -9,7 +9,7 @@ public class Main {
     static boolean[] isVisited;
     //    static Map<Integer, List<Integer>> nodes = new HashMap<>();
     static List<Integer>[] nodes;
-    static int connectionGraph = 1;
+    static int connectionGraph = 0;
 
 
     public static void main(String[] args) throws IOException {
@@ -45,9 +45,7 @@ public class Main {
         for (int i = 1; i <= vertexCount; i++) {
             if (!isVisited[i]) {
                 dfs(i);
-                if (!isAllCovered()) {
-                    connectionGraph++;
-                }
+                connectionGraph++;
             }
         }
         StringBuilder sb = new StringBuilder();
