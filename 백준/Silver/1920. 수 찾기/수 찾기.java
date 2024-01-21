@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 public class Main {
 
     static int[] numbers;
+    static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
 
@@ -23,9 +24,9 @@ public class Main {
         st = new StringTokenizer(bf.readLine());
         for (int i = 0; i < compareNumberCounts; i++) {
             int comparingNumber = Integer.parseInt(st.nextToken());
-            System.out.println(bSearch(comparingNumber));
+            bSearch(comparingNumber);
         }
-
+        System.out.println(sb);
 
     }
 
@@ -37,6 +38,9 @@ public class Main {
         while (low <= high) {
             int mid = low + (high - low) / 2;
             if (numbers[mid] == comparingNumber) {
+
+                sb.append(1);
+                sb.append('\n');
                 return 1;
             }
             if (numbers[mid] < comparingNumber) {
@@ -45,7 +49,8 @@ public class Main {
                 high = mid - 1;
             }
         }
-
+        sb.append(0);
+        sb.append('\n');
         return 0;
     }
 
