@@ -28,8 +28,9 @@ public class Main {
         dfs(1, 0);
         visited = new boolean[adjustNodes.length + 1];
         dfs(longestNode, 0);
-
-        System.out.println(diameter);
+        StringBuilder sb = new StringBuilder();
+        sb.append(diameter);
+        System.out.println(sb);
     }
 
     private static void settingAdjustNodes(BufferedReader bf) throws IOException {
@@ -44,7 +45,6 @@ public class Main {
                 }
                 int adjustLength = Integer.parseInt(st.nextToken());
                 adjustNodes[startNodeIndex].put(nodeIndex, adjustLength);
-//                adjustNodes[nodeIndex].put(startNodeIndex, adjustLength);
             }
         }
     }
@@ -63,18 +63,4 @@ public class Main {
             longestNode = node;
         }
     }
-
-    private static int findFirstLeaf(int node) {
-
-        visited[node] = true;
-        Map<Integer, Integer> adjustNode = adjustNodes[node];
-        for (Entry<Integer, Integer> adjustNodeIndex : adjustNode.entrySet()) {
-            if (!visited[adjustNodeIndex.getKey()]) {
-                findFirstLeaf(adjustNodeIndex.getKey());
-            }
-        }
-        return node;
-    }
-
-
 }
