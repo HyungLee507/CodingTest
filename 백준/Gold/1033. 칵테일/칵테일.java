@@ -15,29 +15,24 @@ public class Main {
 
         List<Ingredient> ingredients = new ArrayList<>();
 
-        for (int i = 0; i < ingredientCount; i++) {
-            Ingredient ingredient = new Ingredient();
-            ingredient.addGroupOne(i);
-            ingredients.add(ingredient);
-        }
+        initData(ingredientCount, ingredients);
         for (int i = 0; i < ingredientCount - 1; i++) {
             StringTokenizer st = new StringTokenizer(bf.readLine());
             int index1 = Integer.parseInt(st.nextToken());
             int index2 = Integer.parseInt(st.nextToken());
             int denominator = Integer.parseInt(st.nextToken());
             int numerator = Integer.parseInt(st.nextToken());
-            int gsd = useEuclidean(denominator, numerator);
-            denominator = denominator / gsd;
-            numerator = numerator / gsd;
 
             int num1 = ingredients.get(index1).getValue() * numerator;
             int num2 = ingredients.get(index2).getValue() * denominator;
-            gsd = useEuclidean(num1, num2);
+
+            int gsd = useEuclidean(num1, num2);
             num1 /= gsd;
             num2 /= gsd;
 
             HashSet<Integer> group1 = ingredients.get(index1).getGroups();
             HashSet<Integer> group2 = ingredients.get(index2).getGroups();
+
             for (Integer index : group1) {
                 ingredients.get(index).multiplyValue(num2);
                 ingredients.get(index).addGroup(group2);
@@ -46,9 +41,20 @@ public class Main {
                 ingredients.get(index).multiplyValue(num1);
                 ingredients.get(index).addGroup(group1);
             }
-//            ingredients.get(index1).addGroup(group2);
-//            ingredients.get(index2).addGroup(group1);
         }
+
+        printResult(ingredients);
+    }
+
+    private static void initData(int ingredientCount, List<Ingredient> ingredients) {
+        for (int i = 0; i < ingredientCount; i++) {
+            Ingredient ingredient = new Ingredient();
+            ingredient.addGroupOne(i);
+            ingredients.add(ingredient);
+        }
+    }
+
+    private static void printResult(List<Ingredient> ingredients) {
         StringBuilder sb = new StringBuilder();
         for (Ingredient ingredient : ingredients) {
             sb.append(ingredient.getValue()).append(' ');
