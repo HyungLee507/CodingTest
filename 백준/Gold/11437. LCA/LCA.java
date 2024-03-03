@@ -2,81 +2,72 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
-class Main {    
-    static int vertexNum; 
-    static ArrayList<ArrayList<Integer>> tree;
-    static int m;
+public class Main {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringBuilder sb = new StringBuilder();
+    static StringTokenizer st;
+
+    static int N, M;
+    static List<Integer>[] graph;
+    static int[] parents;
     static int[] depth;
-    static int[] parent;
-    public static void main(String[] args) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static boolean[] visited;
 
-        // 입력받기
-        vertexNum = Integer.parseInt(br.readLine());
-        tree = new ArrayList<ArrayList<Integer>>();
-        for(int i=0; i<vertexNum+1; i++)
-            tree.add(new ArrayList<Integer>());
+    public static void main(String[] args) throws IOException {
+        N = Integer.parseInt(br.readLine());
+        graph = new List[N + 1];
+        for (int n = 1; n <= N; n++) {
+            graph[n] = new ArrayList<>();
+        }
+        parents = new int[N + 1];
+        depth = new int[N + 1];
+        visited = new boolean[N + 1];
 
-        // 주어진 점들로 트리 만들기
-        for(int i=0; i<vertexNum-1; i++){
-            String[] temp = br.readLine().split(" ");
-            int a = Integer.parseInt(temp[0]);
-            int b = Integer.parseInt(temp[1]);
-            tree.get(a).add(b);
-            tree.get(b).add(a);
+        for (int n = 0; n < N - 1; n++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            graph[a].add(b);
+            graph[b].add(a);
         }
 
-        depth = new int[vertexNum+1];
-        parent = new int[vertexNum+1];
-        m = Integer.parseInt(br.readLine());
+        dfs(1, 0);
 
-        // 정점들의 depth 구하기
-        dfs(1,1);
-        for(int i=0; i<m; i++){
-            // 공통 조상을 구할 두 노드
-            String[] temp2 = br.readLine().split(" ");
-            int a = Integer.parseInt(temp2[0]);
-            int b = Integer.parseInt(temp2[1]);
+        M = Integer.parseInt(br.readLine());
+        for (int m = 0; m < M; m++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            while (a != b) {
+                if (depth[a] == depth[b]) {
+                    a = parents[a];
+                    b = parents[b];
+                } else if (depth[a] > depth[b]) {
+                    a = parents[a];
+                } else {
+                    b = parents[b];
+                }
+            }
 
-            int same = solve(a, depth[a], b, depth[b]);
-            System.out.println(same);
+            sb.append(a).append('\n');
         }
 
-        br.close();
+        System.out.print(sb);
     }
 
-    static int solve(int a, int a_depth, int b, int b_depth){
-        // 둘의 depth가 같아질 때까지 위로 올린다.
-        if(a_depth > b_depth){
-            while(a_depth != b_depth){
-                a_depth--;
-                a = parent[a];
+    static void dfs(int v, int d) {
+        depth[v] = d;
+        visited[v] = true;
+
+        for (int child : graph[v]) {
+            if (visited[child]) {
+                continue;
             }
-        }
-        else if(a_depth < b_depth){
-            while(a_depth != b_depth){
-                b_depth--;
-                b = parent[b];
-            }
-        }
-
-
-        while(a != b){
-            a = parent[a];
-            b = parent[b];
-        }
-
-        return a;
-    }
-
-    static void dfs(int from, int cnt) {
-        depth[from] = cnt++;
-        for(Integer next: tree.get(from)) {
-            if(depth[next] == 0) {
-                dfs(next, cnt);
-                parent[next] = from;
-            }
+            parents[child] = v;
+            dfs(child, d + 1);
         }
     }
 }
