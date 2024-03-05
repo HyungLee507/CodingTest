@@ -36,11 +36,12 @@ public class Main {
         LinkedList<Integer> compareNumbers = IntStream.range(1, n + 1).boxed()
                 .collect(Collectors.toCollection(LinkedList::new));
         for (int i = 0; i < iterationCount - 1; i++) {
-            if (compareNumbers.getFirst() > numbers.getFirst()) {
-                k = k + (compareNumbers.indexOf(numbers.getFirst())) * factorial(n - 1);
-            } else if (compareNumbers.getFirst() < numbers.getFirst()) {
-                k = k + (compareNumbers.indexOf(numbers.getFirst())) * factorial(n - 1);
-            }
+//            if (compareNumbers.getFirst() > numbers.getFirst()) {
+//                k = k + (compareNumbers.indexOf(numbers.getFirst())) * factorial(n - 1);
+//            } else if (compareNumbers.getFirst() < numbers.getFirst()) {
+//                k = k + (compareNumbers.indexOf(numbers.getFirst())) * factorial(n - 1);
+//            }
+            k = k + (compareNumbers.indexOf(numbers.getFirst())) * factorial(n - 1);
             n -= 1;
             compareNumbers.remove(numbers.removeFirst());
         }
