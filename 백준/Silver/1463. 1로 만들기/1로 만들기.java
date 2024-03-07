@@ -22,15 +22,13 @@ public class Main {
             numbers[3] = 1;
         }
 
-        for (int i = 4; i < numbers.length; i++) {
-            numbers[i] = Integer.min(numbers[i - 1] + 1, numbers[i - 2] + 2);
-            if (i % 6 == 0) {
-                numbers[i] = Integer.min(numbers[i], numbers[i / 3] + 1);
-                numbers[i] = Integer.min(numbers[i], numbers[i / 2] + 1);
-            } else if (i % 3 == 0) {
-                numbers[i] = Integer.min(numbers[i], numbers[i / 3] + 1);
-            } else if (i % 2 == 0) {
-                numbers[i] = Integer.min(numbers[i], numbers[i / 2] + 1);
+        for (int i = 2; i < numbers.length; i++) {
+            numbers[i] = numbers[i - 1] + 1;
+            if (i % 2 == 0) {
+                numbers[i] = Math.min(numbers[i], numbers[i / 2] + 1);
+            }
+            if (i % 3 == 0) {
+                numbers[i] = Math.min(numbers[i], numbers[i / 3] + 1);
             }
         }
         return numbers;
