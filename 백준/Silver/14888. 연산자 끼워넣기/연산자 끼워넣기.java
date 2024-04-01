@@ -26,7 +26,6 @@ public class Main {
 
     private static void getValue(int value, int level, int[] calculations) {
         if (level == numbers.size() - 1) {
-//            getValues(value, level, calculations);
             max = Integer.max(max, value);
             min = Integer.min(min, value);
             return;
@@ -48,29 +47,7 @@ public class Main {
             getValue(value / num1, level + 1,
                     new int[]{calculations[0], calculations[1], calculations[2], calculations[3] - 1});
         }
-
-
     }
-
-    private static void getValues(int value, int level, int[] calculations) {
-//        if (calculations[PLUS] == 1) {
-//            max = Integer.max(max, value + numbers.get(level + 1));
-//            min = Integer.min(min, value + numbers.get(level + 1));
-//        }
-//        if (calculations[MINUS] == 1) {
-//            max = Integer.max(max, value - numbers.get(level + 1));
-//            min = Integer.min(min, value - numbers.get(level + 1));
-//        }
-//        if (calculations[MULTIPLY] == 1) {
-//            max = Integer.max(max, value * numbers.get(level + 1));
-//            min = Integer.min(min, value * numbers.get(level + 1));
-//        }
-//        if (calculations[DIVIDE] == 1) {
-//            max = Integer.max(max, value / numbers.get(level + 1));
-//            min = Integer.min(min, value / numbers.get(level + 1));
-//        }
-    }
-
 
     private static void initData() throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
