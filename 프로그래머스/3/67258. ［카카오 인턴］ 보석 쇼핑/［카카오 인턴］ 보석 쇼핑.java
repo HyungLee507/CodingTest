@@ -1,6 +1,7 @@
 import java.util.*;
 class Solution {
     public int[] solution(String[] gems) {
+        //        String[] gems = new String[]{"A", "B", "B", "B", "C", "D", "D", "D", "D", "D", "D", "D", "B", "C", "A"};
         List<String> list = Arrays.asList(gems);
         Set<String> gemSet = new HashSet<>(list);
         int markSize = gemSet.size();
@@ -12,16 +13,13 @@ class Solution {
             int size = markMap.size();
             if (size < markSize) {
                 markMap.put(gems[end], markMap.getOrDefault(gems[end], 0) + 1);
-                if (markMap.size() != markSize) {
-                    end++;
-                }
             } else {
                 removeData(markMap, gems[start]);
                 answer = updateIndex(start, end, answer);
-                if (markMap.size()!= markSize) {
-                    end++;
-                }
                 start++;
+            }
+            if (markMap.size() != markSize) {
+                end++;
             }
         }
         return answer;
