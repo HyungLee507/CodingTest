@@ -33,14 +33,15 @@ class Solution {
                 int value = aNum.getValue();
                 count[value]++;
             }
-            System.out.printf("#%d ", test_case);
+            System.out.printf("#%d\n", test_case);
             ANum[] name = ANum.values();
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < count[i]; j++) {
-                    System.out.printf("%s ", name[i]);
+                    sb.append(name[i]).append(" ");
                 }
             }
-            System.out.println();
+            System.out.println(sb);
         }
     }
 }
