@@ -71,14 +71,8 @@ class Solution {
     private void dks(int[] gates) {
         Queue<Node> queue = new PriorityQueue<>();
         for (int i = 0; i < gates.length; i++) {
-//            visited[gates[i]] = true;
             queue.add(new Node(gates[i], 0, 0, 0));
         }
-
-//        for (Node next : adjustNodes[nodeIndex]) {
-//            queue.add(new Node(next.nodeIndex, 0, next.cost, next.cost));
-//        }
-
         while (!queue.isEmpty()) {
             Node now = queue.poll();
             if (!visited[now.nodeIndex]) {
@@ -93,7 +87,6 @@ class Solution {
             }
             for (Node next : adjustNodes[now.nodeIndex]) {
                 if (!visited[next.nodeIndex]) {
-//                    visited[next.nodeIndex] = true;
                     queue.add(
                             new Node(next.nodeIndex, 0, next.cost, Math.max(next.cost, now.intensity)));
                 }
