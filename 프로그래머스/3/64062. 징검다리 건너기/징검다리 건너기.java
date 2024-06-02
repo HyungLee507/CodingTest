@@ -1,6 +1,6 @@
 import java.util.*;
 class Solution {
-    int min ;
+    int min;
     public int solution(int[] stones, int k) {
         int n = stones.length;
         Deque<Integer> deque = new LinkedList<>();
@@ -25,7 +25,6 @@ class Solution {
                 maxCrossings = Math.min(maxCrossings, stones[deque.peekFirst()]);
             }
         }
-        
         return maxCrossings;
     }
 }
