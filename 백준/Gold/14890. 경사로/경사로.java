@@ -32,12 +32,11 @@ public class Main {
             }
         }
         for (int i = 0; i < N; i++) {
-            int[][] temp = new int[2][N];
+            int[] temp = new int[N];
             for (int j = 0; j < N; j++) {
-                temp[0][j] = map[j][i];
-                temp[1][N - 1 - j] = map[j][i];
+                temp[j] = map[j][i];
             }
-            if (isCorrect(temp[0])) {
+            if (isCorrect(temp)) {
                 answer++;
             }
         }
