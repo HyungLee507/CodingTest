@@ -1,3 +1,5 @@
+
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,7 +9,7 @@ import java.util.StringTokenizer;
 
 public class Main {
     private static int[] damage = {9, 3, 1};
-    private static int[][][] dp;
+    private static boolean[][][] dp;
     private static int[][] seq = {{0, 1, 2}, {0, 2, 1}, {1, 2, 0}, {1, 0, 2}, {2, 0, 1}, {2, 1, 0}};
 
     static int N;
@@ -27,20 +29,13 @@ public class Main {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         N = Integer.parseInt(bf.readLine());
-        dp = new int[61][61][61];
+        dp = new boolean[61][61][61];
         scv = new int[3];
         st = new StringTokenizer(bf.readLine());
         for (int i = 0; i < N; i++) {
             scv[i] = Integer.parseInt(st.nextToken());
         }
-        for (int i = 0; i < 61; i++) {
-            for (int j = 0; j < 61; j++) {
-                for (int k = 0; k < 61; k++) {
-                    dp[i][j][k] = -1;
-                }
-            }
-        }
-        dp[scv[0]][scv[1]][scv[2]] = 0;
+        dp[scv[0]][scv[1]][scv[2]] = true;
         System.out.println(bfs(scv));
     }
 
@@ -57,8 +52,8 @@ public class Main {
                 if (allDead(next)) {
                     return poll.depth + 1;
                 }
-                if (dp[next[0]][next[1]][next[2]] == -1) {
-                    dp[next[0]][next[1]][next[2]] = dp[poll.unit[0]][poll.unit[0]][poll.unit[0]] + 1;
+                if (!dp[next[0]][next[1]][next[2]]) {
+                    dp[next[0]][next[1]][next[2]] = true;
                     queue.offer(new Info(next, poll.depth + 1));
                 }
             }
