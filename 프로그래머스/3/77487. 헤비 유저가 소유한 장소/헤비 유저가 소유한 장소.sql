@@ -1,0 +1,10 @@
+-- 코드를 입력하세요
+SELECT *
+FROM PLACES p
+WHERE p.HOST_ID IN 
+    ( SELECT p2.HOST_ID 
+      FROM PLACES p2 
+      GROUP BY HOST_ID
+      HAVING COUNT(*) >= 2
+    )
+ORDER BY p.ID;
